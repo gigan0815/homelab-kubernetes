@@ -1,4 +1,4 @@
-# Homelab Kubernetes
+# homelab-kubernetes
 
 Kubernetes manifests for services running on a 3-node cluster on Proxmox VMs.
 
