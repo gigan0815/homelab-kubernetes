@@ -15,17 +15,17 @@ For a full overview of the homelab infrastructure see the
 
 ## Repository Structure
 
-homelab-kubernetes/
-├── deployments/
-│   └── nginx/
-│       ├── configmap.yml
-│       ├── deployment.yml
-│       ├── secret.yml
-│       └── service.yml
-├── helm/
-│   └── nginx/
-│       └── values.yml
-└── README.md
+    homelab-kubernetes/
+    ├── deployments/
+    │   └── nginx/
+    │       ├── configmap.yml
+    │       ├── deployment.yml
+    │       ├── secret.yml
+    │       └── service.yml
+    ├── helm/
+    │   └── nginx/
+    │       └── values.yml
+    └── README.md
 
 ## Deployments
 
