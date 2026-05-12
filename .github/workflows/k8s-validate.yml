@@ -18,5 +18,5 @@ jobs:
           cd $GITHUB_WORKSPACE
           for manifest in $(find deployments -name "*.yml"); do
             echo "Checking $manifest..."
-            kubectl apply --dry-run=client --validate=false -f "$manifest"
+            kubeconform -strict -summary "$manifest"
           done
