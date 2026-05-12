@@ -1,0 +1,22 @@
+name: Validate k8s YAML manifests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-yaml:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate each YAML manifest
+        run: |
+          cd $GITHUB_WORKSPACE
+          for manifest in $(find deployments -name "*.yml"); do
+            echo "Checking $manifest..."
+            kubectl apply --dry-run=client --validate=false -f "$manifest"
+          done
