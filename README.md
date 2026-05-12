@@ -16,6 +16,9 @@ For a full overview of the homelab infrastructure see the
 ## Repository Structure
 
     homelab-kubernetes/
+    ├── .github/
+    │   └── workflows/
+    │       └── k8s-validate.yml
     ├── deployments/
     │   └── nginx/
     │       ├── configmap.yml
@@ -25,15 +28,31 @@ For a full overview of the homelab infrastructure see the
     ├── helm/
     │   └── nginx/
     │       └── values.yml
+    ├── docs/
+    │   └── kubectl-cheatsheet.md
     └── README.md
 
 ## Deployments
 
 ### nginx
-Simple nginx deployment for learning purposes.
+Simple nginx deployment for learning purposes. Uses a ConfigMap for the
+HTML content and a Secret for environment variables.
 
-    kubectl apply -f deployments/nginx/deployment.yml
-    kubectl apply -f deployments/nginx/service.yml
+    kubectl apply -f deployments/nginx/
+
+## Helm
+
+Helm chart values for nginx using the bitnami chart.
+
+    helm install my-nginx bitnami/nginx --namespace helm-test -f helm/nginx/values.yml
+
+## CI/CD
+
+Automated YAML manifest validation runs on every push to main via GitHub Actions.
+The self-hosted runner is deployed on the github-runner LXC container.
+
+### Workflows
+- `k8s-validate.yml` - validates all Kubernetes manifests using kubeconform
 
 ## Usage
 
@@ -43,5 +62,5 @@ Apply all manifests in a directory:
 
 Check status:
 
-    kubectl get pods
-    kubectl get services
+    kubectl get pods -n webserver
+    kubectl get services -n webserver
